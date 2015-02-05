@@ -1,18 +1,5 @@
-using System;
-using System.Data.Entity;
+<%@LANGUAGE="VBSCRIPT"%>
 
-namespace adsweeny.Users
-{
-    public class Users
-    {
-        public int userID { get; set; }
-        public string username { get; set; }
-        public string first { get; set; }
-        public string last { get; set; }
-    }
+<br />No Database connection set up in Azure yet.<br />
 
-    public class adsweeny : Users
-    {
-        public DbSet<adsweeny> Users { get; set; }
-    }
-}
+<% Response.WriteFile ("footer.inc") %>
