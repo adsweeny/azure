@@ -14,9 +14,6 @@ SQL = "SELECT * FROM dbo.Users"
 'create an instance of the ADO connection and recordset objects
 Set Connection = CreateObject("ADODB.Connection")
 Set Recordset = CreateObject("ADODB.Recordset")
-
-'open the connection to the database
-Connection.Open "DSN=tgcdbbhzjb.database.windows.net;UID=adsweeny@tgcdbbhzjb;PWD=q988crunKJC4fvqcvX18;Database=adsweeny"
 %>
 
 <% Response.WriteFile ("footer.inc") %>
