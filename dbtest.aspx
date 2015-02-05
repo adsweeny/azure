@@ -1,18 +1,30 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <%
-Dim Recordset1
-Dim Recordset1_cmd
-Dim Recordset1_numRows
+option explicit
 
-Recordset1_cmd = Server.CreateObject ("ADODB.Command")
-Recordset1_cmd.ActiveConnection = adsweeny
-Recordset1_cmd.CommandText = "SELECT * FROM dbo.Users" 
-Recordset1_cmd.Prepared = true
+Dim Connection
+Dim Recordset
+Dim SQL
+Dim Server
+Dim field
 
-Recordset1 = Recordset1_cmd.Execute
-Recordset1_numRows = 0
-%>
-<%
+'declare the SQL statement that will query the database
+SQL = "SELECT * FROM dbo.Users"
+
+'create an instance of the ADO connection and recordset objects
+Set Connection = CreateObject("ADODB.Connection")
+Set Recordset = CreateObject("ADODB.Recordset")
+
+'open the connection to the database
+Connection.Open "DSN=tgcdbbhzjb.database.windows.net;UID=adsweeny@tgcdbbhzjb;PWD=q988crunKJC4fvqcvX18;Database=adsweeny"
+
+'Open the recordset object executing the SQL statement and return records 
+Recordset.Open SQL,Connection
+
+'first of all determine whether there are any records 
+If Recordset.EOF Then 
+wscript.echo "There are no records to retrieve; Check that you have the correct job number."
+Else 
 Dim Repeat1__numRows
 Dim Repeat1__index
 
@@ -48,8 +60,5 @@ End While
 Recordset1.Close()
 Recordset1 = Nothing
 %>
-
-<% Response.WriteFile ("footer.inc") %>
-<%@LANGUAGE="VBSCRIPT"%>
 
 <% Response.WriteFile ("footer.inc") %>
