@@ -1,22 +1,18 @@
-<%@LANGUAGE="VBSCRIPT"%>
-<%
-Const adOpenStatic = 3 
-Const adLockOptimistic = 3 
- 
-Set objConnection = CreateObject("ADODB.Connection") 
-Set objRecordSet = CreateObject("ADODB.Recordset") 
- 
-objConnection.Open _ 
-    "Provider=SQLOLEDB;Data Source=tgcdbbhzjb.database.windows.net;" & _ 
-        "Trusted_Connection=Yes;Initial Catalog=adsweeny;" & _ 
-             "User ID=adsweeny;Password=q988crunKJC4fvqcvX18;" 
- 
-objRecordSet.Open "SELECT * FROM Users", _ 
-        objConnection, adOpenStatic, adLockOptimistic 
- 
-objRecordSet.MoveFirst 
- 
-Wscript.Echo objRecordSet.RecordCount 
-%>
+using System;
+using System.Data.Entity;
 
-<% Response.WriteFile ("footer.inc") %>
+namespace adsweeny.Users
+{
+    public class Users
+    {
+        public int userID { get; set; }
+        public string username { get; set; }
+        public string first { get; set; }
+        public string last { get; set; }
+    }
+
+    public class adsweeny : Users
+    {
+        public DbSet<adsweeny> Users { get; set; }
+    }
+}
