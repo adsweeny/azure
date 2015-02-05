@@ -1,17 +1,22 @@
 <%@LANGUAGE="VBSCRIPT"%>
 <%
-Dim Connection
-Dim Recordset
-Dim SQL
-Dim Server
-Dim field
-
-'declare the SQL statement that will query the database
-SQL = "SELECT * FROM dbo.Users"
-
-'create an instance of the ADO connection and recordset objects
-Set Connection = CreateObject("ADODB.Connection")
-Set Recordset = CreateObject("ADODB.Recordset")
+Const adOpenStatic = 3 
+Const adLockOptimistic = 3 
+ 
+Set objConnection = CreateObject("ADODB.Connection") 
+Set objRecordSet = CreateObject("ADODB.Recordset") 
+ 
+objConnection.Open _ 
+    "Provider=SQLOLEDB;Data Source=tgcdbbhzjb.database.windows.net;" & _ 
+        "Trusted_Connection=No;Initial Catalog=adsweeny;" & _ 
+             "User ID=adsweeny;Password=q988crunKJC4fvqcvX18;" 
+ 
+objRecordSet.Open "SELECT * FROM Users", _ 
+        objConnection, adOpenStatic, adLockOptimistic 
+ 
+objRecordSet.MoveFirst 
+ 
+Wscript.Echo objRecordSet.RecordCount 
 %>
 
 <% Response.WriteFile ("footer.inc") %>
